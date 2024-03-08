@@ -1,0 +1,46 @@
+<div class="customer-register_fields_main_container">
+
+    <div class="customer-register_fields_secondary_container" >
+        <form [formGroup]="LoginForm" (ngSubmit)="LoginCustomer()" >
+            <div class="customer-form_fields_main_container" >
+                
+               <div class="customer-form_field_main_container">  
+                    <input 
+                        type="text" 
+                        placeholder="Email"
+                        [ngModel] = "customerForRegister.email"  
+                        formControlName="email"
+                        
+                    >
+                    <span style="color:red" *ngIf="this.LoginForm.get('email')?.errors?.['required']" >
+                        Campo requerido*
+                    </span>
+                    <span style="color:red" *ngIf="this.LoginForm.get('email')?.errors?.['email']" >
+                        No válido
+                    </span>
+                </div>
+
+                <div class="customer-form_field_main_container" >
+                    <input 
+                        type="password" 
+                        placeholder="Password"
+                        [ngModel] = "customerForRegister.password"  
+                        formControlName="password"
+                    >
+                    <span style="color:red" *ngIf="this.LoginForm.get('password')?.errors?.['required']" >
+                        Campo requerido*
+                    </span>
+                </div>
+
+                <div class="customer-button_save_main_container" >
+                    <button class="customer-button_save_container" type="submit" >
+                        <div>
+                            <!-- <fa-icon [icon]="faFloppyDisk"></fa-icon> -->
+                        </div>
+                        Log In
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

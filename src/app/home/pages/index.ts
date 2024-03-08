@@ -1,0 +1,1 @@
+export { HomeComponent } from 'src/app/home/pages/home/home.component';

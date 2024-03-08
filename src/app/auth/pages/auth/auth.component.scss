@@ -1,0 +1,17 @@
+.auth-signin_signup_container{
+    display: flex;
+    justify-content: space-around;
+    width: 300px;
+}
+
+.auth-secondary_container{
+    justify-content: center;
+    display:flex;
+}
+
+.auth-main_container{
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; 
+}

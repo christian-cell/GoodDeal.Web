@@ -1,0 +1,25 @@
+<div class="auth-main_container" >
+
+    <div>
+        <div class="auth-secondary_container" >
+
+            <div class="auth-signin_signup_container" >
+                <button (click)="GoTo('signIn')"  >Sign In</button>
+                <button (click)="GoTo('signUp')"  >Sign Up</button>
+            </div>
+    
+    
+        </div>
+    
+        <div *ngIf="signUp" >
+            <app-customer-register ></app-customer-register>
+        </div>
+    
+        <div *ngIf="signIn">
+            <app-customer-login ></app-customer-login>
+        </div>
+    </div>
+    
+
+</div>
+

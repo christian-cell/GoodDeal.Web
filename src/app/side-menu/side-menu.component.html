@@ -1,0 +1,56 @@
+<div  class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+    <mat-toolbar color="primary" class="example-toolbar">
+        <div class="side_menu-top_menu_container" >
+          <div *ngIf="isToken" >
+            <button class="sidenav-toggle-button" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+          </div>
+          <div>
+            <h1 class="example-app-name">GoodDeal</h1>
+          </div>
+        </div>
+  
+        <div *ngIf="isToken" >
+          <div>
+            <span class="side_menu-userName_span" >{{ customer.firstName }}</span>
+            <fa-icon class="side_menu-logout_icon" (click)="Logout()" [icon]="faLock"></fa-icon>
+          </div>
+        </div>
+        
+      
+    </mat-toolbar>
+  
+    <mat-sidenav-container class="example-sidenav-container"
+        [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+  
+        <mat-sidenav [opened]="opened" #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'"
+          [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"
+        >
+    
+          <mat-nav-list>
+            <div class="side_menu-menu_title_container">
+              <span class="side_menu-menu_title" >
+                Usuarios
+              </span>
+            </div>
+  
+          </mat-nav-list>
+  
+          <mat-nav-list>
+
+            <div class="side_menu-menu_title_container">
+                <span class="side_menu-menu_title" >
+                Grupo de usuarios
+                </span>
+            </div>
+  
+          </mat-nav-list>
+  
+        
+        </mat-sidenav>
+
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+  
+    </mat-sidenav-container>
+  </div>

@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'bootstrap/dist/css/bootstrap-grid.min.css';
+@import 'material-icons/iconfont/material-icons.css';
+
+@font-face {
+    font-family: Open-Sans;
+    src: url('./assets/fonts/openSans/OpenSans-Italic.ttf') format("opentype");
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+* {
+    font-family: Open-Sans;
+}

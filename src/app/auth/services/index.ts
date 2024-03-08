@@ -1,0 +1,1 @@
+export { CustomerService } from 'src/app/auth/services/httpRequests/customer.service';

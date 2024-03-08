@@ -1,0 +1,105 @@
+<div class="customer-register_fields_main_container">
+
+    <div class="customer-register_fields_secondary_container" >
+        <form [formGroup]="CustomerRegisterForm" (ngSubmit)="RegisterCustomer()" >
+            <div class="customer-form_fields_main_container" >
+                <div class="customer-form_field_main_container" >
+                    <input 
+                        type="text" 
+                        placeholder="Nombre"
+                        [ngModel] = "customerForRegister.firstName"  
+                        formControlName="firstName"
+                        
+                    >
+                    <span style="color:red" *ngIf="this.CustomerRegisterForm.get('firstName')?.errors?.['required']" >
+                        Campo requerido*
+                    </span>
+                </div>
+                <div class="customer-form_field_main_container" >
+                    <input 
+                        type="text" 
+                        placeholder="Apellidos"
+                        [ngModel] = "customerForRegister.lastName"  
+                        formControlName="lastName"
+                        
+                    >
+                    <span style="color:red" *ngIf="this.CustomerRegisterForm.get('lastName')?.errors?.['required']" >
+                        Campo requerido*
+                    </span>
+                </div>
+                <div class="customer-form_field_main_container" >
+                    <input 
+                        type="text"
+                        placeholder="Teléfono"
+                        [ngModel] = "customerForRegister.phone"  
+                        formControlName="phone"
+                        
+                    >
+                    <span style="color:red" *ngIf="this.CustomerRegisterForm.get('phone')?.errors?.['required']" >
+                        Campo requerido*
+                    </span>
+                </div>
+                <div class="customer-form_field_main_container" >
+                    <input 
+                        type="text" 
+                        placeholder="Documento de Identidad"
+                        [ngModel] = "customerForRegister.documentNumber"  
+                        formControlName="documentNumber"
+                        
+                    >
+                    <span style="color:red" *ngIf="this.CustomerRegisterForm.get('documentNumber')?.errors?.['required']" >
+                        Campo requerido*
+                    </span>
+               </div>
+               <div class="customer-form_field_main_container">  
+                    <input 
+                        type="text" 
+                        placeholder="Email"
+                        [ngModel] = "customerForRegister.email"  
+                        formControlName="email"
+                        
+                    >
+                    <span style="color:red" *ngIf="this.CustomerRegisterForm.get('email')?.errors?.['required']" >
+                        Campo requerido*
+                    </span>
+                    <span style="color:red" *ngIf="this.CustomerRegisterForm.get('email')?.errors?.['email']" >
+                        Solo direcciones de correo elecrónico
+                    </span>
+                </div>
+
+                <div class="customer-form_field_main_container" >
+                    <input 
+                        type="password" 
+                        placeholder="Password"
+                        [ngModel] = "customerForRegister.password"  
+                        formControlName="password"
+                    >
+                    <span style="color:red" *ngIf="this.CustomerRegisterForm.get('password')?.errors?.['required']" >
+                        Campo requerido*
+                    </span>
+                </div>
+
+                <div class="customer-form_field_main_container" >
+                    <input 
+                        type="password" 
+                        placeholder="Confirm Password"
+                        [ngModel] = "customerForRegister.passwordConfirm"  
+                        formControlName="passwordConfirm"
+                    >
+                    <span style="color:red" *ngIf="this.CustomerRegisterForm.get('passwordConfirm')?.errors?.['required']" >
+                        Campo requerido*
+                    </span>
+                </div>
+            </div>
+
+            <div class="customer-button_save_main_container" >
+                <button class="customer-button_save_container" type="submit" >
+                    <div>
+                        <!-- <fa-icon [icon]="faFloppyDisk"></fa-icon> -->
+                    </div>
+                    Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
