@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "GoodDeal.Web": {
+      "i18n": {
+        "locales": {
+          "es": "src/locales/messages.es.xlf",
+          "en": "src/locales/messages.en.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {

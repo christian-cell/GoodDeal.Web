@@ -83,12 +83,14 @@ export class CustomerRegisterComponent implements OnDestroy {
         }
 
       } else{
+        
         console.log(customer.error);
       }
     })
   }
 
   ngOnDestroy(): void {
+
     this.customerDestroyed$.next();
     this.customerDestroyed$.complete();
   }

@@ -30,17 +30,11 @@ export const CustomerReducer = createReducer(
         return { ...state , ...loginResponse.logingResponse };
     }),
 
-    on(CustomerActions.addCustomerDataFromToken , (state , { customerInfo }) => {
+    on(CustomerActions.addCustomerDataFromPayload , (state , { customerInfo }) => {
 
         const { customerData : { email } , logingResponse : { expiration , lifetime , mD5 , token , userId } } = customerInfo || {};
 
-        const tokenParts = token.split('.');
-    
-        const payloadBase64 = tokenParts[1];
-
-        const payloadDecoded = atob(payloadBase64);
-
-        const payload = JSON.parse(payloadDecoded);
+        const payload = getCustomerInfoFromToken( token );
     
         const customer : CustomerRegister = {
             firstName : payload.firstName,
@@ -66,6 +60,23 @@ export const CustomerReducer = createReducer(
 
     }),
 
+    on( CustomerActions.addCustomerDataFromToken , (state , { order }) => {
+
+        const token : string | null = window.localStorage.getItem("token");
+
+        if( token && order === 'store_customerInfo_from_token' ){
+
+            const payload = getCustomerInfoFromToken( token );
+
+            return { ...payload }
+
+        } else {
+
+            return state;
+        }
+        
+    }),
+
     on( CustomerActions.cleanCustomerData , ( state , { order }) => {
 
         console.log(state , order);
@@ -75,3 +86,14 @@ export const CustomerReducer = createReducer(
         return new CustomerRegister();
     })
 ) 
+
+const getCustomerInfoFromToken = ( token : string ) => {
+
+    const tokenParts = token.split('.');
+    
+    const payloadBase64 = tokenParts[1];
+
+    const payloadDecoded = atob(payloadBase64);
+
+    return JSON.parse(payloadDecoded);
+}

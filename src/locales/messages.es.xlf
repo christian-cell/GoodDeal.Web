@@ -1,0 +1,4 @@
+<trans-unit id="1">
+    <source>Hello, world!</source>
+    <target>Hola, mundo!</target>
+</trans-unit>

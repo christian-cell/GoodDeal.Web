@@ -12,7 +12,7 @@ import { MatExpansionModule /* , MatAccordion */ } from '@angular/material/expan
 import {MatButtonModule} from '@angular/material/button';
 /* fontawsome */
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { /* HTTP_INTERCEPTORS, */ HttpClientModule } from '@angular/common/http';
+import { /* HTTP_INTERCEPTORS, */ HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +25,15 @@ import { metaReducers, reducers } from 'src/app/store/metaReducers';
 import { metaEffects } from './store/metaEffects';
 import { environment } from 'src/environments/environment.development';
 import { SideMenuComponent } from './side-menu/side-menu.component';
+
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgOptimizedImage } from '@angular/common';
+import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json'); // Usa TranslateHttpLoader para cargar archivos JSON
+}
 
 @NgModule({
   declarations: [
@@ -49,9 +58,23 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
     MatExpansionModule,
     MatButtonModule,
     FontAwesomeModule,
-    
+    NgOptimizedImage,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
-  providers: [],
+  exports: [TranslateModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

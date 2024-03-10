@@ -10,6 +10,7 @@ import {
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 import { AppState, CustomerRegister } from 'src/app/models';
+import { I18nService } from '../shared/services';
 
 @Component({
   selector: 'app-side-menu',
@@ -17,9 +18,11 @@ import { AppState, CustomerRegister } from 'src/app/models';
   templateUrl: './side-menu.component.html',
   styleUrl: './side-menu.component.scss'
 })
+
 export class SideMenuComponent implements OnInit , OnDestroy {
   opened =                          false;
   showFiller =                      false;
+  panelOpenState:                   boolean = false;
 
   mobileQuery:                      MediaQueryList;
   faLock:                           IconDefinition=faLock;
@@ -27,6 +30,17 @@ export class SideMenuComponent implements OnInit , OnDestroy {
   customerDestroyed$:               Subject<void> = new Subject<void>();
   customer:                         CustomerRegister = new CustomerRegister();
   isToken=                          false;
+  navs = [
+    {
+      route : 'home' , name : 'HOME'
+    },
+    {
+      route : 'products' , name : 'PRODUCTS'
+    },
+    {
+      route : 'mySales' , name : 'MYSALES'
+    }
+  ]
 
   private _mobileQueryListener: () => void;
 
@@ -35,9 +49,9 @@ export class SideMenuComponent implements OnInit , OnDestroy {
   
 
   constructor(
-
+    private i18nService:            I18nService,
     private store:                  Store<AppState>,
-    changeDetectorRef:              ChangeDetectorRef, 
+    private changeDetectorRef:      ChangeDetectorRef, 
     media:                          MediaMatcher,
     library:                        FaIconLibrary,
     private router:                 Router
@@ -49,6 +63,7 @@ export class SideMenuComponent implements OnInit , OnDestroy {
     library.addIconPacks(fas);
     library.addIcons(faLock);
     library.addIcons(faUsers);
+    
   }
 
   ngOnInit(): void {
@@ -56,11 +71,20 @@ export class SideMenuComponent implements OnInit , OnDestroy {
     this.GetCustomerInfo();
   }
 
+  changeLanguage(lang : string): void {
+
+    this.i18nService.setLanguage( lang );
+  }
+
+
+
   GetCustomerInfo():void{
 
     this.store.select( AppState => AppState.customer ).pipe( takeUntil( this.customerDestroyed$ ) ).subscribe(( customer : CustomerRegister ) => {
 
       this.customer = { ...customer };
+
+      this.changeDetectorRef.detectChanges();
       
       if( window.localStorage.getItem("token") ){
         

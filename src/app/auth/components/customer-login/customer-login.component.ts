@@ -6,7 +6,7 @@ import { AppState, LoginResponse } from 'src/app/models';
 import { CustomerService } from '../../services';
 import { Router } from '@angular/router';
 import { LoginCustomer } from 'src/app/models/class/CustomerRegister.models';
-import { addCustomerDataFromToken } from 'src/app/store/actions/customer/customer.actions';
+import { addCustomerDataFromPayload } from 'src/app/store/actions/customer/customer.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -52,7 +52,7 @@ export class CustomerLoginComponent implements OnDestroy {
           if( logingResponse.token && logingResponse.token.length > 0 ){
 
             this.store.dispatch( 
-              addCustomerDataFromToken(
+              addCustomerDataFromPayload(
                 { customerInfo : { logingResponse : logingResponse , customerData : {email:customer.email , password : customer.password} } }
               ) 
             )

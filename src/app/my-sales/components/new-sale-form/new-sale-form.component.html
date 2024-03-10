@@ -1,0 +1,41 @@
+<div>
+    <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="">Producto</label>
+            <input 
+                type="text"
+                name="productName" 
+                [(ngModel)]="sale.productName"
+            >
+        </div>
+        <div>
+            <label for="">Descripción</label>
+            <input 
+                type="text"
+                name="productDescription" 
+                [(ngModel)]="sale.productDescription"
+            >
+        </div>
+        <div>
+            <label for="">Precio</label>
+            <input 
+                type="text"
+                name="price" 
+                [(ngModel)]="sale.price"
+            >
+        </div>
+
+        <div>
+            <label for="">fotos</label>
+            <input 
+                type="file" 
+                name="images" 
+                accept="image/*" 
+                multiple 
+                (change)="onFileSelected($event)"
+            >
+        </div>
+
+        <button type="submit">Publicar</button>
+    </form>
+</div>

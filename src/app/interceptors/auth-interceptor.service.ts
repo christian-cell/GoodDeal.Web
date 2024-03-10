@@ -14,6 +14,7 @@ export class AuthInterceptorService {
     let request = req;
 
     if (window.localStorage.getItem('token')) {
+      console.log('entra por aquí');
       request = req.clone({
         setHeaders: {
           authorization: `Bearer ${ window.localStorage.getItem('token') }`

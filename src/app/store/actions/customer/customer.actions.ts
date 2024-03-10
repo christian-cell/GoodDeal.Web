@@ -22,9 +22,14 @@ export const addLoginDataToCustomer = createAction(
     props<{ logingResponse : LoginResponse }>()
 )
 
+export const addCustomerDataFromPayload = createAction(
+    '[Customer] Add customer data from payload',
+    props<{ customerInfo : { logingResponse : LoginResponse , customerData : {email:string , password : string} } }>()
+)
+
 export const addCustomerDataFromToken = createAction(
     '[Customer] Add customer data from token',
-    props<{ customerInfo : { logingResponse : LoginResponse , customerData : {email:string , password : string} } }>()
+    props<{ order : string }>()
 )
 
 export const cleanCustomerData = createAction(

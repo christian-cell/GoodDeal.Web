@@ -1,56 +1,84 @@
-<div  class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
-    <mat-toolbar color="primary" class="example-toolbar">
-        <div class="side_menu-top_menu_container" >
-          <div *ngIf="isToken" >
-            <button class="sidenav-toggle-button" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-          </div>
-          <div>
-            <h1 class="example-app-name">GoodDeal</h1>
-          </div>
-        </div>
-  
-        <div *ngIf="isToken" >
-          <div>
-            <span class="side_menu-userName_span" >{{ customer.firstName }}</span>
-            <fa-icon class="side_menu-logout_icon" (click)="Logout()" [icon]="faLock"></fa-icon>
-          </div>
-        </div>
-        
-      
-    </mat-toolbar>
-  
-    <mat-sidenav-container class="example-sidenav-container"
-        [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-  
-        <mat-sidenav [opened]="opened" #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'"
-          [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"
-        >
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+  <mat-toolbar color="primary" class="example-toolbar">
+    <div class="side_menu-top_menu_container" >
+      <div *ngIf="isToken">
+        <button class="sidenav-toggle-button" mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      </div>
+      <div class="side_nav-GoodDeal_title_container" >
+        <h1 class="example-app-name">Good Deal</h1>
+      </div>
+    </div>
+
+    <div *ngIf="isToken" >
+      <span class="side_menu-userName_span" >{{  customer.firstName }}</span>
+      <fa-icon class="side_menu-logout_icon" (click)="Logout()" [icon]="faLock"></fa-icon>
+    </div>
     
-          <mat-nav-list>
-            <div class="side_menu-menu_title_container">
-              <span class="side_menu-menu_title" >
-                Usuarios
-              </span>
-            </div>
-  
-          </mat-nav-list>
-  
-          <mat-nav-list>
+  </mat-toolbar>
 
-            <div class="side_menu-menu_title_container">
-                <span class="side_menu-menu_title" >
-                Grupo de usuarios
-                </span>
-            </div>
-  
-          </mat-nav-list>
-  
+  <mat-sidenav-container class="example-sidenav-container"
+      [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+
+    <mat-sidenav [opened]="opened" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+
+      <mat-nav-list>
+      
+        <div *ngFor="let nav of navs" >
         
-        </mat-sidenav>
+          <div class="side_menu-span_item_name_container" >
 
-      <mat-sidenav-content>
-        <router-outlet></router-outlet>
-      </mat-sidenav-content>
-  
-    </mat-sidenav-container>
-  </div>
+            <a 
+              mat-list-item 
+              [routerLink]="nav.route" 
+            > {{ nav.name | translate }} </a>
+
+          </div>
+
+        </div>
+
+        <mat-accordion>
+          
+          <mat-expansion-panel (opened)="panelOpenState = true"
+
+            (closed)="panelOpenState = false" [expanded]="false"
+          
+          >
+            <mat-expansion-panel-header>
+
+              <mat-panel-title class="side_menu-Apps_dropdown_title" >
+
+                <p>{{ 'LANGUAGE' | translate }}</p>
+
+              </mat-panel-title>
+
+              <mat-panel-description>
+
+                <p>{{ 'CHANGE_LANGUAGE' | translate }}</p>
+
+              </mat-panel-description>
+
+            </mat-expansion-panel-header>
+            
+            <div class="side_nav-languages_flags_container" >
+
+              <div> <img (click)="changeLanguage('en')" [ngSrc]="'../../assets/icons/flags/england.jpeg'" alt="england flag" width="20" height="20"> </div>
+
+              <div> <img (click)="changeLanguage('es')" [ngSrc]="'../../assets/icons/flags/spain.jpeg'"  alt="spain flag" width="20" height="20"> </div>
+
+            </div>
+    
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="side_menu-router_container">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+    
+
+  </mat-sidenav-container>
+</div>
