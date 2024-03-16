@@ -80,7 +80,7 @@ export class SideMenuComponent implements OnInit , OnDestroy {
 
   GetCustomerInfo():void{
 
-    this.store.select( AppState => AppState.customer ).pipe( takeUntil( this.customerDestroyed$ ) ).subscribe(( customer : CustomerRegister ) => {
+    this.store.select( AppState => AppState.Customer ).pipe( takeUntil( this.customerDestroyed$ ) ).subscribe(( customer : CustomerRegister ) => {
 
       this.customer = { ...customer };
 

@@ -1,11 +1,13 @@
 import { ActionReducer, ActionReducerMap, MetaReducer } from "@ngrx/store";
 import { AppState } from "../models";
 import { CustomerReducer } from "./reducers/customer/customer.reducer";
+import { MySalesReducer } from "./reducers/sales/sales.reducers";
 // import { hydrationMetaReducer } from "src/app/store/hidratation.reducer"
 
 
 export const reducers : ActionReducerMap<AppState> = {
-    customer : CustomerReducer
+    Customer : CustomerReducer,
+    MySales : MySalesReducer
 }
 
 export function debug( reducer: ActionReducer<string> ): ActionReducer<string>{

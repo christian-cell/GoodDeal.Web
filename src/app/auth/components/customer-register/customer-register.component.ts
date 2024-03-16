@@ -65,7 +65,7 @@ export class CustomerRegisterComponent implements OnDestroy {
 
   LoginCustomer():void{
     
-    this.store.select( AppState => AppState.customer ).pipe( takeUntil( this.customerDestroyed$ ) ).subscribe(( customer : CustomerRegister ) => {
+    this.store.select( AppState => AppState.Customer ).pipe( takeUntil( this.customerDestroyed$ ) ).subscribe(( customer : CustomerRegister ) => {
 
       if( !customer.error ){
 

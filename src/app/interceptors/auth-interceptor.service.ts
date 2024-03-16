@@ -1,27 +1,59 @@
-import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {
+    HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpClient, HttpBackend
+} from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthInterceptorService {
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment.development';
 
-  constructor() { }
+@Injectable()
+export class AuthInterceptorService implements HttpInterceptor {
 
-  intercept(req: HttpRequest<string>, next: HttpHandler): Observable<HttpEvent<string>> {
-  
-    let request = req;
+  private http: HttpClient;
 
-    if (window.localStorage.getItem('token')) {
-      console.log('entra por aquí');
-      request = req.clone({
+  constructor(private backend: HttpBackend) {
+    this.http = new HttpClient(backend);
+  }
+
+  intercept(req: HttpRequest<any>, next: HttpHandler):
+    Observable<HttpEvent<any>> {
+
+    const token: string | null = localStorage.getItem('access_token');
+
+    if (token) {
+
+      req = req.clone({
+
         setHeaders: {
-          authorization: `Bearer ${ window.localStorage.getItem('token') }`
+
+          Authorization: `Bearer ${token}`
+
         }
       });
     }
 
-    return next.handle(request);
+    return next.handle(req).pipe(catchError(error => {
+      if (error.status === 401) {
+        
+        this.http.post<{userId : string , token : string , md5 : string , Expiration : Date , lifetime : number}>(`${environment.GoodDealAPI.url}Auth/RefreshToken`, {
+          
+          refreshToken: window.localStorage.getItem("token")
+        
+        }).subscribe(response => {
+          
+          localStorage.setItem('access_token', response.token);
+
+          req = req.clone({
+            setHeaders: {
+              Authorization: `Bearer ${response.token}`
+            }
+          });
+
+          return next.handle(req);
+        });
+      }
+      return throwError(error);
+    }));
   }
 }

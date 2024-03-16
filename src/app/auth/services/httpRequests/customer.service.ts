@@ -21,4 +21,8 @@ export class CustomerService {
     return this.http.post<LoginResponse>(`${environment.GoodDealAPI.url}Auth/AuthAsync` , credentials);
   }
 
+  refreshToken() {
+    return this.http.post(`${environment.GoodDealAPI.url}auth/RefreshToken`, {}); 
+}
+
 }
