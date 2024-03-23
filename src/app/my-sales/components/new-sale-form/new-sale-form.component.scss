@@ -1,0 +1,129 @@
+.new_sale-status_container{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px;
+    width: 93%;
+}
+
+.new_sale-register_fields_main_container{ 
+    display:flex;
+    justify-content: center;
+}
+
+.new_sale-register_fields_secondary_container{
+    width:50%;
+}
+
+.new_sale-status_title_container{
+    width:50%;
+}
+
+.new_sale-status_combo_container{
+    width:50%;
+}
+
+.new_sale-button_save_container{
+    display: flex;
+    justify-content: center;
+    background-color: #315b8a;
+    color:white;
+    border-radius:4px;
+    padding:6px;
+    width:155px;
+    border:none;
+    height:36px;
+}
+
+.new_sale-button_save_container:hover{
+    background-color: #273c75;
+    cursor:pointer;
+}
+
+.new_sale-button_save_main_container{
+    margin-top:20px;
+}
+
+.new_sale-form_fields_main_container{
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.new_sale-form_field_main_container{
+    margin:10px 20px;
+    width:45%;
+    min-width:290px;
+}
+
+.new_sale-form_field_main_container>input{
+    width: 100%;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid rgb(52, 152, 219);
+    font-size: 15px;
+    background-color: rgb(247, 248, 249);
+    height: 35px;
+    border-radius: 3px;
+    padding: 10px 10px;
+}
+
+.new_sale-button_save_main_container{
+    padding:20px 20px;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.customers_filters-associated_checkbox_container{
+    display: flex;
+    padding: 0px 20px;
+    width: 240px;
+    justify-content: flex-end;
+}
+
+.new_sale-form_container{
+    width:95%;
+}
+
+.new_sale-top_container{
+    padding:0px 21px;
+    margin-top:10px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+
+.new_sale-kind_container{
+    display: flex;
+    padding: 0px 20px;
+    justify-content: space-between
+}
+
+.new_sale-bottom_container{
+    display:flex;
+    justify-content: space-between;
+}
+
+.new_sale-files_download_popup-files_icons{
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 1319px) {
+    .new_sale-register_fields_secondary_container{
+       width:100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .new_sale-form_field_main_container{
+       width:35%;
+    }
+}
+
+@media (min-width: 1443px) {
+    .new_sale-form_field_main_container{
+       width:40%;
+    }
+}

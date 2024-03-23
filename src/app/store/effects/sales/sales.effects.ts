@@ -14,9 +14,7 @@ export class SalesEffects {
         private salesService:                                                  SalesService
     ){}
 
-    
-
-    storeCustomer$ = createEffect(() => {
+    storeSales$ = createEffect(() => {
         return this.action$
         .pipe(
             ofType(SalesActions.storeMySales),
@@ -30,6 +28,28 @@ export class SalesEffects {
                     }),
                     catchError(error => {
                         return of( SalesActions.storeMySalesFailure({ error : error }) )
+                    })
+                )
+            })
+        )
+    }) 
+
+    storeNewSingleSale$ = createEffect(() => {
+        return this.action$
+        .pipe(
+            ofType(SalesActions.storeNewSale),
+            switchMap(( action ) => {
+
+                const { newSale } = action || {};
+
+                return this.salesService.AddNewSingleSale( newSale )
+                .pipe(
+                    map(( newSale ) =>{
+                        
+                        return SalesActions.storeNewSalesuccess({ newSale });
+                    }),
+                    catchError(error => {
+                        return of( SalesActions.storeNewSaleFailure({ error : error }) )
                     })
                 )
             })

@@ -1,6 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Sale } from 'src/app/models';
+import { Store } from '@ngrx/store';
+import { AppState, Sale } from 'src/app/models';
+import { storeNewSale } from 'src/app/store/actions/sales/sales.actions';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -16,13 +18,16 @@ export class NewSaleFormComponent {
   
   selectedFiles:                                             File[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private store:                                           Store<AppState>
+  ) {}
 
   onFileSelected(event: any) {
     this.selectedFiles = event.target.files;
   }
 
-  onSubmit() {
+  CreateNewSale() {
+
     const formData = new FormData();
 
     formData.append('productName', this.sale.productName || '');
@@ -39,19 +44,7 @@ export class NewSaleFormComponent {
 
     console.log(formData);
 
-    if( formData ){
-
-      this.http.post(`${environment.GoodDealAPI.url}Sale`, formData)
-      .subscribe(response => {
-
-        console.log(response);
-
-      }, (error: HttpErrorResponse) => {
-
-        console.log(error);
-      });
-
-    }
+    this.store.dispatch( storeNewSale({ newSale : formData }) );
 
     
   }

@@ -12,11 +12,20 @@ export const MySalesReducer = createReducer(
     initialMySalesEntries,
 
     on( SalesActions.storeMySalesSuccess , (state , { mySales })=>{
-       
 
         state = mySales;
+
         return state;
     }),
+
+    on( SalesActions.storeNewSalesuccess , ( state , { newSale } ) => {
+
+        const mySales = [ ...state.items ];
+
+        mySales.unshift( newSale );
+
+        return { ...state , items : mySales };
+    })
     
     
 ) 

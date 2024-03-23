@@ -1,41 +1,54 @@
-<div>
-    <form #myForm="ngForm" (ngSubmit)="onSubmit()">
-        <div>
-            <label for="">Producto</label>
-            <input 
-                type="text"
-                name="productName" 
-                [(ngModel)]="sale.productName"
-            >
-        </div>
-        <div>
-            <label for="">Descripción</label>
-            <input 
-                type="text"
-                name="productDescription" 
-                [(ngModel)]="sale.productDescription"
-            >
-        </div>
-        <div>
-            <label for="">Precio</label>
-            <input 
-                type="text"
-                name="price" 
-                [(ngModel)]="sale.price"
-            >
-        </div>
+<div class="new_sale-register_fields_main_container">
+    
+    <div class="new_sale-register_fields_secondary_container" >
 
-        <div>
-            <label for="">fotos</label>
-            <input 
-                type="file" 
-                name="images" 
-                accept="image/*" 
-                multiple 
-                (change)="onFileSelected($event)"
-            >
-        </div>
+        <form #myForm="ngForm" (ngSubmit)="CreateNewSale()">
+            <div class="new_sale-form_field_main_container" >
+                <label for="">Producto</label>
+                <input 
+                    type="text"
+                    name="productName" 
+                    [(ngModel)]="sale.productName"
+                >
+            </div>
+            <div class="new_sale-form_field_main_container" >
+                <label for="">Descripción</label>
+                <input 
+                    type="text"
+                    name="productDescription" 
+                    [(ngModel)]="sale.productDescription"
+                >
+            </div>
+            <div class="new_sale-form_field_main_container" >
+                <label for="">Precio</label>
+                <input 
+                    type="text"
+                    name="price" 
+                    [(ngModel)]="sale.price"
+                >
+            </div>
+    
+            <div class="new_sale-form_field_main_container" >
+                <label for="">fotos</label>
+                <input 
+                    type="file" 
+                    name="images" 
+                    accept="image/*" 
+                    multiple 
+                    (change)="onFileSelected($event)"
+                >
+            </div>
 
-        <button type="submit">Publicar</button>
-    </form>
+            <div class="new_sale-button_save_main_container" >
+                <button class="new_sale-button_save_container" type="submit" >
+                    <div>
+                        <!-- <fa-icon [icon]="faFloppyDisk"></fa-icon> -->
+                    </div>
+                    Publicar
+                </button>
+            </div>
+        </form>
+
+    </div>
+
 </div>

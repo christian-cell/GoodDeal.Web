@@ -8,6 +8,7 @@ import { ListComponent } from './pages/mySalesList/list.component';
 import { MySalesTopMenuComponent } from './components/my-sales-top-menu/my-sales-top-menu.component';
 import { NewSaleFormComponent } from './components/new-sale-form/new-sale-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MySalesTableComponent } from './components/my-sales-table/my-sales-table.component';
 
 
 
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NewSaleComponent,
     ListComponent,
     MySalesTopMenuComponent,
-    NewSaleFormComponent
+    NewSaleFormComponent,
+    MySalesTableComponent
   ],
   imports: [
     RouterModule,
